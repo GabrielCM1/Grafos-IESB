@@ -84,3 +84,13 @@ void liberar_grafo_lista(GrafoLista *g) {
     free(g->adj);
     free(g);
 }
+
+void exibir_lista(GrafoLista *g) {
+    for (int i = 0; i < g->n; i++) {
+        printf("%d:", i);
+        for (No *atual = g->adj[i]; atual != NULL; atual = atual->prox) {
+            printf(" -> %d", atual->destino);
+        }
+        printf("\n");
+    }
+}

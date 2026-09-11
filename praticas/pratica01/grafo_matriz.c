@@ -31,3 +31,24 @@ int grau_matriz(GrafoMatriz *g, int v) {
     }
     return grau;
 }
+
+int sao_adjacentes_matriz(GrafoMatriz *g, int u, int v) {
+    return g->adj[u][v] == 1;
+}
+
+void exibir_matriz(GrafoMatriz *g) {
+    for (int i = 0; i < g->n; i++) {
+        for (int j = 0; j < g->n; j++) {
+            printf("%d ", g->adj[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void liberar_grafo_matriz(GrafoMatriz *g) {
+    for (int i = 0; i < g->n; i++) {
+        free(g->adj[i]); // libera linha por linha
+    }
+    free(g->adj);
+    free(g);
+}

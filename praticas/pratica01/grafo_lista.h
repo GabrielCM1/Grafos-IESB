@@ -16,6 +16,7 @@ void inserir_aresta_lista(GrafoLista *g, int u, int v);
 void remover_aresta_lista(GrafoLista *g, int u, int v);
 int grau_lista(GrafoLista *g, int v);
 int sao_adjacentes_lista(GrafoLista *g, int u, int v);
+void exibir_lista(GrafoLista *g);
 void liberar_grafo_lista(GrafoLista *g);
 
 #endif

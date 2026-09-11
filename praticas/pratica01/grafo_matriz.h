@@ -11,6 +11,7 @@ void inserir_aresta_matriz(GrafoMatriz *g, int u, int v);
 void remover_aresta_matriz(GrafoMatriz *g, int u, int v);
 int grau_matriz(GrafoMatriz *g, int v);
 int sao_adjacentes_matriz(GrafoMatriz *g, int u, int v);
+void exibir_matriz(GrafoMatriz *g);
 void liberar_grafo_matriz(GrafoMatriz *g);
 
 #endif
