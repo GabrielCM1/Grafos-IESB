@@ -72,8 +72,7 @@ static void analisar(GrafoLista *g, const char *nome) {
 }
 
 int main() {
-    /* Grafo 1: dois triangulos ligados por uma ponte, mais um vertice pendurado.
-       Articulacoes esperadas: 2, 4 e 6. Pontes esperadas: (2,4) e (6,7). */
+
     GrafoLista *g1 = criar_grafo(7);
     adicionar_aresta_nao_direcionada(g1, 0, 1);
     adicionar_aresta_nao_direcionada(g1, 1, 2);
