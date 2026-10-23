@@ -5,9 +5,14 @@
 #include <stdlib.h>
 
 GrafoListaPonderado *grafo_criar(int num_vertices) {
-    (void)num_vertices;
-    // TODO
-    return NULL;
+    GrafoListaPonderado *g = malloc(sizeof(GrafoListaPonderado));
+    g->num_vertices = num_vertices;
+
+    g->adj = malloc(num_vertices * sizeof(NoAdjPonderado *));
+    for (int i = 0; i < g->num_vertices; i++) {
+        g->adj[i] = NULL;
+    }
+    return g;
 }
 
 void grafo_adicionar_aresta(GrafoListaPonderado *g, int origem, int destino, int peso) {
