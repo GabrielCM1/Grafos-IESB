@@ -15,7 +15,7 @@ GrafoListaPonderado *grafo_criar(int num_vertices) {
     return g;
 }
 
-// Grafo dirigido: a aresta vai apenas de origem para destino
+
 void grafo_adicionar_aresta(GrafoListaPonderado *g, int origem, int destino, int peso) {
     NoAdjPonderado *novo = malloc(sizeof(NoAdjPonderado));
     novo->vertice = destino;
