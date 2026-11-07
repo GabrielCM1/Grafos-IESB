@@ -1,5 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "cobertura.h"
+
+#define REPETICOES 1000
 
 int main(void) {
     int cobertura[MAX_VERTICES];
@@ -31,8 +35,41 @@ int main(void) {
     cobertura[3] = 0;
     printf("C3 = {C} eh cobertura? %i\n", eh_cobertura(arestas, cobertura, 3));
 
-    /* TODO: experimento para n = 5, 8, 10, 12, 15:
-       medir o tempo de cobertura_minima_bt e comparar com cobertura_gulosa */
+    printf("Minima (backtracking): %i vertice(s)\n", cobertura_minima_bt(arestas, 4, 3, cobertura));
+    printf("Gulosa (maior grau): %i vertice(s)\n", cobertura_gulosa(arestas, 4, 3, cobertura));
+
+    /* Experimento: grafos aleatorios (probabilidade 1/2 por aresta), semente fixa */
+    int tamanhos[] = {5, 8, 10, 12, 15};
+    srand(42);
+    printf("\n  n   m | otimo  tempo(ms) | guloso  tempo(ms)\n");
+    for (int k = 0; k < 5; k++) {
+        int n = tamanhos[k], m = 0;
+        for (int u = 0; u < n; u++) {
+            for (int v = u + 1; v < n; v++) {
+                if (rand() % 2) {
+                    arestas[m].u = u;
+                    arestas[m].v = v;
+                    m++;
+                }
+            }
+        }
+
+        /* Repete cada medicao pois uma execucao isolada fica abaixo da resolucao do clock() */
+        int otimo = 0, guloso = 0;
+        clock_t t = clock();
+        for (int r = 0; r < REPETICOES; r++) {
+            otimo = cobertura_minima_bt(arestas, n, m, cobertura);
+        }
+        double tempo_bt = 1000.0 * (clock() - t) / CLOCKS_PER_SEC / REPETICOES;
+
+        t = clock();
+        for (int r = 0; r < REPETICOES; r++) {
+            guloso = cobertura_gulosa(arestas, n, m, cobertura);
+        }
+        double tempo_guloso = 1000.0 * (clock() - t) / CLOCKS_PER_SEC / REPETICOES;
+
+        printf("%3i %3i | %5i %10.3f | %6i %10.3f\n", n, m, otimo, tempo_bt, guloso, tempo_guloso);
+    }
 
     return 0;
 }
